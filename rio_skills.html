@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rio Yoshida — Skills</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1916;
+    --ink-2: #4a4844;
+    --ink-3: #8a8780;
+    --ink-4: #c4c1b8;
+    --paper: #f8f6f1;
+    --paper-2: #f0ede6;
+    --paper-3: #e8e4db;
+    --accent: #2d5a3d;
+    --accent-light: #e8f0eb;
+    --accent-mid: #6a9e7a;
+    --warm: #b5763a;
+    --warm-light: #f5ede0;
+    --border: rgba(26,25,22,0.1);
+    --border-strong: rgba(26,25,22,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ── NAV ── */
+  nav {
+    padding: 2rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .nav-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.active { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 5rem 0 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: end;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .hero-left {}
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(42px, 6vw, 60px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--ink-2);
+  }
+
+  .hero-right {
+    padding-bottom: 4px;
+  }
+
+  .hero-bio {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-2);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-bio strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border: 0.5px solid var(--border-strong);
+    border-radius: 20px;
+    color: var(--ink-3);
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-head {
+    padding: 3.5rem 0 2.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .section-head-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-4);
+  }
+
+  .section-head-line {
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  /* ── CASE STUDIES ── */
+  .cases { padding-bottom: 5rem; }
+
+  .case {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0 2.5rem;
+    padding: 2.5rem 0;
+    border-bottom: 0.5px solid var(--border);
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .case:nth-child(1) { animation-delay: 0.1s; }
+  .case:nth-child(2) { animation-delay: 0.25s; }
+  .case:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .case:last-child { border-bottom: none; }
+
+  .case-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--ink-4);
+    line-height: 1;
+    padding-top: 6px;
+    text-align: right;
+  }
+
+  .case-content {}
+
+  .case-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .case-org {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .case-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--ink-4);
+  }
+
+  .case-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .case-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+  }
+
+  .case-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--paper-2);
+    color: var(--ink-3);
+    border: 0.5px solid var(--border);
+  }
+
+  .case-body {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink-2);
+    margin-bottom: 1.5rem;
+  }
+
+  .case-body strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ── ARTIFACT CARDS ── */
+  .artifact {
+    background: var(--paper-2);
+    border: 0.5px solid var(--border-strong);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 12px;
+  }
+
+  .artifact:last-child { margin-bottom: 0; }
+
+  .artifact-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 1rem;
+  }
+
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .arch-item {
+    background: var(--paper);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+
+  .arch-item-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .arch-item-desc {
+    font-size: 11px;
+    color: var(--ink-3);
+    line-height: 1.4;
+  }
+
+  /* KPI table */
+  .kpi-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .kpi-table th {
+    text-align: left;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding: 0 12px 10px 0;
+    border-bottom: 0.5px solid var(--border-strong);
+  }
+
+  .kpi-table td {
+    padding: 10px 12px 10px 0;
+    border-bottom: 0.5px solid var(--border);
+    color: var(--ink-2);
+    vertical-align: top;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .kpi-table tr:last-child td { border-bottom: none; }
+
+  .kpi-table td:first-child {
+    font-weight: 500;
+    color: var(--ink);
+    width: 26%;
+  }
+
+  .kpi-table td.kpi-metric {
+    color: var(--ink-3);
+    font-size: 12px;
+    width: 32%;
+  }
+
+  .dim-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-right: 7px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+
+  /* Research grid */
+  .research-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .research-card {
+    background: var(--paper);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .research-ctx {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+
+  .research-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 5px;
+    line-height: 1.35;
+  }
+
+  .research-desc {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+
+  .pub-pill {
+    display: inline-block;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--accent-light);
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  /* Context grid */
+  .ctx-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 2rem 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--ink-3);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: var(--ink-3);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 620px) {
+    .hero { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 0 2.5rem; }
+    .case { grid-template-columns: 48px 1fr; gap: 0 1.5rem; }
+    .case-num { font-size: 36px; }
+    .arch-grid { grid-template-columns: repeat(2, 1fr); }
+    .research-grid { grid-template-columns: 1fr; }
+    .ctx-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <a class="nav-name" href="#">Rio Yoshida</a>
+    <ul class="nav-links">
+      <li><a href="#">About</a></li>
+      <li><a href="#" class="active">Skills</a></li>
+      <li><a href="#">Research</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Skills in practice</p>
+      <h1 class="hero-title">What I bring<br><em>to the work</em></h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-bio">
+        I am a researcher and community builder with a background in <strong>educational psychology</strong> and a master's in Changing Education at the University of Helsinki. My work sits at the intersection of research design, community strategy, and self-directed communication — across academic, startup, and organisational contexts.
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag">Helsinki, Finland</span>
+        <span class="hero-tag">Educational research</span>
+        <span class="hero-tag">Community design</span>
+        <span class="hero-tag">Open to opportunities</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="cases">
+    <div class="section-head">
+      <span class="section-head-label">Three core skills</span>
+      <div class="section-head-line"></div>
+    </div>
+
+    <!-- CASE 01 -->
+    <article class="case">
+      <div class="case-num">01</div>
+      <div class="case-content">
+        <div class="case-meta">
+          <span class="case-org">Cogknit · Helsinki</span>
+          <div class="case-dot"></div>
+          <span class="case-org">2025 – 2026</span>
+        </div>
+        <h2 class="case-title">Strategic community building</h2>
+        <div class="case-tags">
+          <span class="case-tag">Community strategy</span>
+          <span class="case-tag">Engagement design</span>
+          <span class="case-tag">Competitive research</span>
+          <span class="case-tag">Ambassador model</span>
+        </div>
+        <p class="case-body">
+          Tasked with building Cogknit's community for internationally mobile talent in Finland from the ground up, I began by studying how high-performing communities operate — drawing on Duolingo's engagement mechanics, the 1990 niche community pyramid model, and the architecture of communities like Lovable. I then designed a <strong>layered community model</strong>: an open public square, career-stage pods for psychological safety, industry pods for peer exchange, and locked inner-circle pods earned through demonstrated engagement. I also conducted a structured competitive analysis, mapping Cogknit's positioning against existing platforms in Finland. At the end of the role, I produced a full strategic handover report — including a proposed ambassador model — to ensure the work could scale beyond a single coordinator.
+        </p>
+
+        <div class="artifact">
+          <div class="artifact-label">Community architecture — Cogknit</div>
+          <div class="arch-grid">
+            <div class="arch-item">
+              <div class="arch-item-title">Public square</div>
+              <div class="arch-item-desc">Open channels: intros, jobs, Q&A, wins, events</div>
+            </div>
+            <div class="arch-item">
+              <div class="arch-item-title">Career pods</div>
+              <div class="arch-item-desc">~50 members grouped by career stage</div>
+            </div>
+            <div class="arch-item">
+              <div class="arch-item-title">Industry pods</div>
+              <div class="arch-item-desc">~50 members grouped by sector</div>
+            </div>
+            <div class="arch-item">
+              <div class="arch-item-title">Locked pods</div>
+              <div class="arch-item-desc">~6 members, access earned by engagement</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CASE 02 -->
+    <article class="case">
+      <div class="case-num">02</div>
+      <div class="case-content">
+        <div class="case-meta">
+          <span class="case-org">Cogknit · Kyoto University · ICLS</span>
+          <div class="case-dot"></div>
+          <span class="case-org">2022 – 2026</span>
+        </div>
+        <h2 class="case-title">Data-driven measurement & research design</h2>
+        <div class="case-tags">
+          <span class="case-tag">KPI design</span>
+          <span class="case-tag">Quantitative research</span>
+          <span class="case-tag">Questionnaire design</span>
+          <span class="case-tag">SPSS · R</span>
+        </div>
+        <p class="case-body">
+          My core research skill is making phenomena measurable with rigor. At Cogknit, I designed a <strong>KPI framework for community health</strong> — translating vague notions of "engagement" into specific, trackable metrics across five dimensions. Earlier, as a research assistant at Kyoto University, I designed quantitative questionnaires to measure the efficacy of safety training programs, conducting a pilot study with over 50 construction workers. That work was presented at EAPRIL and published in the proceedings of ICLS 2022. Across both contexts, the through-line is the same: building measurement tools that are valid, consistent, and actually reflect what matters.
+        </p>
+
+        <div class="artifact">
+          <div class="artifact-label">Community KPI framework — Cogknit</div>
+          <table class="kpi-table">
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th>KPI</th>
+                <th>What it reveals</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="dim-dot" style="background:#2d5a3d;"></span>Vibrancy</td>
+                <td class="kpi-metric">Active participation rate</td>
+                <td>Members who post or comment, not just lurk</td>
+              </tr>
+              <tr>
+                <td><span class="dim-dot" style="background:#2d5a3d;"></span>Self-sufficiency</td>
+                <td class="kpi-metric">Peer-to-peer ratio</td>
+                <td>Member-to-member help vs. staff-given help</td>
+              </tr>
+              <tr>
+                <td><span class="dim-dot" style="background:#6a9e7a;"></span>Loyalty</td>
+                <td class="kpi-metric">Retention rate</td>
+                <td>Active members at 3, 6, and 12 months</td>
+              </tr>
+              <tr>
+                <td><span class="dim-dot" style="background:#6a9e7a;"></span>Engagement</td>
+                <td class="kpi-metric">DAU / MAU</td>
+                <td>Daily and monthly active user ratio</td>
+              </tr>
+              <tr>
+                <td><span class="dim-dot" style="background:#b5763a;"></span>Business impact</td>
+                <td class="kpi-metric">Product adoption / ROI</td>
+                <td>Whether community drives platform use</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="artifact">
+          <div class="artifact-label">Research outputs</div>
+          <div class="research-grid">
+            <div class="research-card">
+              <div class="research-ctx">ICLS 2022 · Published</div>
+              <div class="research-title">Safety training efficacy in construction</div>
+              <div class="research-desc">Quantitative questionnaire design, pilot with 50+ workers, co-authored publication with Kyoto University</div>
+              <span class="pub-pill">Published paper</span>
+            </div>
+            <div class="research-card">
+              <div class="research-ctx">Cross-national · In preparation</div>
+              <div class="research-title">Test accommodations in higher education</div>
+              <div class="research-desc">Japan, Austria, New Zealand, Czech Republic — comparative disability support practices across four universities</div>
+              <span class="pub-pill">Forthcoming 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CASE 03 -->
+    <article class="case">
+      <div class="case-num">03</div>
+      <div class="case-content">
+        <div class="case-meta">
+          <span class="case-org">Research · Startup · Cogknit</span>
+          <div class="case-dot"></div>
+          <span class="case-org">2022 – 2026</span>
+        </div>
+        <h2 class="case-title">Proactive, self-directed communication</h2>
+        <div class="case-tags">
+          <span class="case-tag">Independent work</span>
+          <span class="case-tag">Stakeholder management</span>
+          <span class="case-tag">Cross-cultural coordination</span>
+          <span class="case-tag">Notion</span>
+        </div>
+        <p class="case-body">
+          I consistently work in environments where structure is partial or absent — and I create it rather than waiting for it. As a research assistant, I organised weekly meetings between a university lab and a corporate partner, coordinated international researchers across four countries, and delivered monthly progress reports to company executives. In a startup context, I identified early that the team lacked a shared rhythm and proposed a weekly meeting structure to address it. I manage my workload in Notion, set my own deadlines, and navigate ambiguity by asking clear questions of myself first. The Cogknit end-of-role report — produced independently and covering strategy, engagement, governance, and forward recommendations — is itself a product of this working style.
+        </p>
+
+        <div class="artifact">
+          <div class="artifact-label">Contexts where this skill has been demonstrated</div>
+          <div class="ctx-grid">
+            <div class="arch-item">
+              <div class="arch-item-title">Cross-institutional research</div>
+              <div class="arch-item-desc">Coordinated 4-country research team; monthly executive reporting</div>
+            </div>
+            <div class="arch-item">
+              <div class="arch-item-title">Startup environment</div>
+              <div class="arch-item-desc">Proposed meeting structures; led user interviews and prototype iterations</div>
+            </div>
+            <div class="arch-item">
+              <div class="arch-item-title">Community coordination</div>
+              <div class="arch-item-desc">Built solo; wrote full strategic handover for incoming team</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <footer>
+    <span class="footer-name">Rio Yoshida</span>
+    <ul class="footer-links">
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">Research</a></li>
+      <li><a href="mailto:">Contact</a></li>
+    </ul>
+  </footer>
+
+</div>
+</body>
+</html>
